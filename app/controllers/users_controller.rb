@@ -4,7 +4,7 @@ class UsersController < ApplicationController
     matching_users = User.all
     @users = matching_users.order(:created_at)
 
-    render({ :template => "users_templates/all_users"})
+    render({ :template => "user_templates/all_users"})
   end
   
   def show
@@ -16,21 +16,25 @@ class UsersController < ApplicationController
   end
   
   def create
-    user = User.new
-    user.username = params.fetch("query_username")
-    user.save
+    input_user = params.fetch("query_username")
     
-    redirect_to("/users/#{user.username}")
+    
+    a_new_user = User.new
+    a_new_user.username = input_user
+    a_new_user.save
+    
+    redirect_to("/users/" + a_new_user.username)
   end
   
   def update
-    user_id = params.fetch("user_id")
-    matching_users = User.where({ :id => user_id })
-    the_user = matching_users.at(0)
+    the_user = params.fetch("query_username")
+    input_username = params.fetch("username")
+    matching_users = User.where({ :username => the_user})
+    user = matching_users.at(0)
     
-    the_user.username = params.fetch("query_username")
-    the_user.save
-    redirect_to("/users/#{user.username}")
+    user.username = input_username
+    user.save
+    redirect_to("/users/" + user.username)
   end
 
 end
