@@ -32,9 +32,9 @@ class VenuesController < ApplicationController
   end
   
   def update
-    new_address = params.fetch("input_address")
-    new_name = params.fetch("input_name")
-    new_neighborhood = params.fetch("input_neighborhood")
+    new_address = params.fetch("updated_address")
+    new_name = params.fetch("updated_name")
+    new_neighborhood = params.fetch("updated_neighborhood")
     
     the_id = params.fetch("venue_id")
 
@@ -42,13 +42,13 @@ class VenuesController < ApplicationController
     
     edited_venue = matching_venues.at(0)
 
-    edited_venue.address = edit_address 
-    edited_venue.name = edit_name
-    edited_venue.neighborhood = edit_neighborhood
+    edited_venue.address = new_address 
+    edited_venue.name = new_name
+    edited_venue.neighborhood = new_neighborhood
 
     edited_venue.save
     
-    redirect_to("/venues/")
+    redirect_to("/venues/" + the_id)
   end
 
   def destroy
