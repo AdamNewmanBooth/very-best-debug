@@ -27,8 +27,8 @@ class UsersController < ApplicationController
   end
   
   def update
-    the_user = params.fetch("query_username")
-    input_username = params.fetch("username")
+    input_username = params.fetch("query_username")
+    the_user = params.fetch("username")
     matching_users = User.where({ :username => the_user})
     user = matching_users.at(0)
     

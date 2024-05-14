@@ -73,6 +73,6 @@ class VenuesController < ApplicationController
    
     a_new_comment.save
     
-    redirect_to("/venues/#{comment.venue_id}")
+    redirect_to("/venues/#{a_new_comment.venue_id}")
   end
 end
